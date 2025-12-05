@@ -1,0 +1,134 @@
+{
+    "annotations": {
+        "list": []
+    },
+    "editable": true,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "panels": [
+        {
+            "datasource": {
+                "type": "redis-datasource",
+                "uid": "aegis-redis-ds"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "yellow",
+                                "value": 5
+                            },
+                            {
+                                "color": "red",
+                                "value": 10
+                            }
+                        ]
+                    }
+                }
+            },
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "colorMode": "background",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value"
+            },
+            "targets": [
+                {
+                    "command": "get",
+                    "keyName": "aegis:stats:blocked_ips",
+                    "refId": "A",
+                    "type": "command"
+                }
+            ],
+            "title": "🛡️ Total Blocked IPs",
+            "type": "stat"
+        },
+        {
+            "datasource": {
+                "type": "redis-datasource",
+                "uid": "aegis-redis-ds"
+            },
+            "fieldConfig": {
+                "defaults": {}
+            },
+            "gridPos": {
+                "h": 12,
+                "w": 24,
+                "x": 0,
+                "y": 6
+            },
+            "id": 2,
+            "options": {
+                "showHeader": true
+            },
+            "targets": [
+                {
+                    "command": "smembers",
+                    "keyName": "aegis:blocked_set",
+                    "refId": "A",
+                    "type": "command"
+                }
+            ],
+            "title": "📜 Blocking History (IP | Timestamp | Score)",
+            "type": "table"
+        },
+        {
+            "content": "# Aegis Zero - AI Threat Detection\n\n**Real-Time Security Dashboard**\n\n| Component | Purpose |\n|-----------|----------|\n| Go Proxy | mTLS + JWT auth, feature extraction |\n| AI Engine | XGBoost anomaly scoring |\n| Redis | IP blocklist + activity log |\n\n**Detection Threshold:** Score < -0.001 = Anomaly",
+            "datasource": null,
+            "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 18
+            },
+            "id": 3,
+            "mode": "markdown",
+            "title": "ℹ️ System Info",
+            "type": "text"
+        }
+    ],
+    "refresh": "5s",
+    "schemaVersion": 26,
+    "style": "dark",
+    "tags": [
+        "security",
+        "ai"
+    ],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-1h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Aegis Zero - Security Dashboard",
+    "uid": "aegis-main",
+    "version": 6
+}
